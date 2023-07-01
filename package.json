@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scenario1": "npx cypress run --headed --no-exit --spec cypress/e2e/scenario1.spec.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "homepage": "https://github.com/OGRemus/lodgify#readme",
   "devDependencies": {
     "cypress": "^12.16.0"
+  },
+  "dependencies": {
+    "cypress-mochawesome-reporter": "^3.5.1"
   }
 }

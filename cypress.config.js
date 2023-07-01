@@ -23,6 +23,9 @@ module.exports = defineConfig({
     watchForFileChanges: true,
     video: false,
     screenshotOnRunFailure: true,
-    defaultCommandTimeout: 10000
+    defaultCommandTimeout: 10000,
+    apiToken: "663c25da3b6be5dbafc11858c93e3b45a275f34b",
+    baseUrl: "https://todoist.com/",
+    baseUrlApi: "https://api.todoist.com/rest/v2/"
   }
 });
