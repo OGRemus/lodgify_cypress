@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scenario1": "npx cypress run --headed --no-exit --spec cypress/e2e/scenario1.spec.js"
+    "scenario1": "npx cypress run --headed --no-exit --spec cypress/e2e/scenario1.spec.js",
+    "scenario2": "npx cypress run --headed --no-exit --spec cypress/e2e/scenario2.spec.js"
+
   },
   "repository": {
     "type": "git",
