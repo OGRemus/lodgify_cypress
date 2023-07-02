@@ -10,6 +10,10 @@ context('Scenario 2', () => {
             cy.login()
         });
 
+        after(() => {
+            cy.projectsCleanup()
+        });
+
         it('Select the created project', () => {
             cy.createProjectApi(testData)
             projectMenu.selectProject(testData)
