@@ -23,3 +23,50 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import endpoints from '../fixtures/endpoints.json'
+
+Cypress.Commands.add('createProjectApi', (testData) => {
+    cy.request({
+        method: 'POST',
+        url: Cypress.env('baseUrlApi') + endpoints.projects,
+        headers: {
+            'Authorization': 'Bearer ' + Cypress.env('apiToken'),
+        },
+        body: {
+            name: testData.projectName,
+            color: testData.projectColor
+        }
+    }).then((response) => {
+        return response
+    });
+})
+
+Cypress.Commands.add('getAllProjects', () => {
+    cy.request({
+        method: 'GET',
+        url: Cypress.env('baseUrlApi') + endpoints.projects,
+        headers: {
+            'Authorization': 'Bearer ' + Cypress.env('apiToken'),
+        },
+    }).then((response) => {
+        return response.body
+    });
+})
+
+Cypress.Commands.add('projectsCleanup', () => {
+    cy.getAllProjects().then((response) => {
+        response.forEach(project => {
+            cy.request({
+                method: 'DELETE',
+                url: Cypress.env('baseUrlApi') + endpoints.projects + `/${project.id}`,
+                headers: {
+                    'Authorization': 'Bearer ' + Cypress.env('apiToken'),
+                },
+            });
+        });
+    })
+})
+
+
+
+

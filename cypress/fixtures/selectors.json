@@ -1,0 +1,16 @@
+{
+    "login": {
+        "email": "#element-0",
+        "password": "#element-3",
+        "loginButton": "button[type='submit']"
+    },
+    "application": {
+        "dashboard": "#todoist_app",
+        "leftMenu": "#left_menu",
+        "leftMenuInner": "#left_menu_inner",
+        "topMenu": "#top-menu",
+        "projectMenu": "#left-menu-projects-panel",
+        "projectList": "#projects_list",
+        "projectItem": "li[data-type='project_list_item']"
+    }
+}
