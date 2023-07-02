@@ -111,7 +111,7 @@ Cypress.Commands.add('login', () => {
     })
 })
 
-Cypress.Commands.Add('getTasksByProjectId', (projId) => {
+Cypress.Commands.add('getTasksByProjectId', (projId) => {
     cy.request({
         method: 'GET',
         url: Cypress.env('baseUrlApi') + endpoints.tasks,
@@ -127,7 +127,7 @@ Cypress.Commands.Add('getTasksByProjectId', (projId) => {
     });
 })
 
-Cypress.Commands.Add('getProjectByName', (name) => {
+Cypress.Commands.add('getProjectByName', (name) => {
     cy.request({
         method: 'GET',
         url: Cypress.env('baseUrlApi') + endpoints.projects,

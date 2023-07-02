@@ -27,5 +27,22 @@ context('Scenario 2', () => {
             projectDash.clickOnAddTaskButton()
             projectDash.checkIfTaskExists(testData.taskName)
         });
+
+        it('Check if task was created via API', () => {
+            cy.getProjectByName(testData.projectName).then((project => {
+                cy.getTasksByProjectId(project.id).then((tasksArr) => {
+                    let index
+                    let obj
+                    for (index in tasksArr) {
+                        obj = tasksArr[index]
+                        if(obj.content == testData.taskName) {
+                            break
+                        }
+                        expect(resolution).to.be.true
+                        expect(obj).to.have.property("description", "Just a description")
+                    }
+                })
+            }))
+        });
     });
 });
