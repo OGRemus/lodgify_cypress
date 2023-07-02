@@ -9,6 +9,7 @@ module.exports = defineConfig({
       html:true,
       json:true
     },
+    testIsolation: false,
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
     setupNodeEvents(on, config) {
       // implement node event listeners here
@@ -18,14 +19,17 @@ module.exports = defineConfig({
   },
 
   env: {
-    disableGpu: false,
-    browser: 'chrome',
-    watchForFileChanges: true,
-    video: false,
-    screenshotOnRunFailure: true,
-    defaultCommandTimeout: 10000,
+    
     apiToken: "663c25da3b6be5dbafc11858c93e3b45a275f34b",
     baseUrl: "https://todoist.com/",
-    baseUrlApi: "https://api.todoist.com/rest/v2/"
-  }
+    baseUrlApi: "https://api.todoist.com/rest/v2/",
+  },
+  disableGpu: false,
+  browser: 'chrome',
+  watchForFileChanges: true,
+  video: false,
+  screenshotOnRunFailure: true,
+  defaultCommandTimeout: 30000,
+  pageLoadTimeout: 40000,
+
 });
