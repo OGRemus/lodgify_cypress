@@ -41,6 +41,18 @@ Cypress.Commands.add('createProjectApi', (testData) => {
             color: testData.projectColor
         }
     }).then((response) => {
+        expect(response.status).to.eq(200)
+        expect(response.body).to.have.property("id").to.not.be.null.and.not.be.undefined
+        expect(response.body).to.have.property("name", testData.projectName)
+        expect(response.body).to.have.property("color", testData.projectColor)
+        expect(response.body).to.have.property("is_shared").to.not.be.null.and.not.be.undefined
+        expect(response.body).to.have.property("comment_count", 0)
+        expect(response.body).to.have.property("order").to.not.be.null.and.not.be.undefined
+        expect(response.body).to.have.property("is_favorite").to.not.be.null.and.not.be.undefined
+        expect(response.body).to.have.property("is_inbox_project").to.not.be.null.and.not.be.undefined
+        expect(response.body).to.have.property("is_team_inbox").to.not.be.null.and.not.be.undefined
+        expect(response.body).to.have.property("view_style").to.not.be.null.and.not.be.undefined
+        expect(response.body).to.have.property("url").to.not.be.null.and.not.be.undefined
         return response
     });
 })
@@ -75,30 +87,60 @@ Cypress.Commands.add('login', () => {
     cy.session('Logged in', () => {
         cy.visit(Cypress.env('baseUrl'))
         cy.contains('Log in')
-        .should('be.visible')
-        .click()
+            .should('be.visible')
+            .click()
 
         cy.url()
-        .should('be.equal', Cypress.env('baseUrl') + 'auth/login')
+            .should('be.equal', Cypress.env('baseUrl') + 'auth/login')
 
         cy.get('h1').
-        should('contain', "Log in")
+            should('contain', "Log in")
 
         cy.get(selectors.login.email)
-        .type(userData.email)
+            .type(userData.email)
 
         cy.get(selectors.login.password)
-        .type(userData.pass)
+            .type(userData.pass)
 
         cy.get(selectors.login.loginButton)
-        .should('be.visible')
-        .should('contain', "Log in")
-        .click()
+            .should('be.visible')
+            .should('contain', "Log in")
+            .click()
         cy.get(selectors.application.dashboard)
-        .should('be.visible')   
+            .should('be.visible')
     })
 })
 
+Cypress.Commands.add('getTasksByProjectId', (projId) => {
+    cy.request({
+        method: 'GET',
+        url: Cypress.env('baseUrlApi') + endpoints.tasks,
+        headers: { 'Authentication': 'Bearer ' + Cypress.env('apiToken'), },
+    }).then((response) => {
+        let taskArr = []
+        for(let index in response.body) {
+            let obj = response.body[index]
+            if(obj.project_id == projId)
+            taskArr.push(obj)
+        }
+        return taskArr
+    });
+})
 
+Cypress.Commands.add('getProjectByName', (name) => {
+    cy.request({
+        method: 'GET',
+        url: Cypress.env('baseUrlApi') + endpoints.projects,
+        headers: { 'Authentication': 'Bearer ' + Cypress.env('apiToken'), },
+    }).then((response) => {
+        for (let index in response.body) {
+            let obj = response.body[index]
+            if (obj.name == name) {
+                return obj
+            }
+        }
+    });
+
+})
 
 

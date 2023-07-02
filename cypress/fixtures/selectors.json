@@ -12,5 +12,30 @@
         "projectMenu": "#left-menu-projects-panel",
         "projectList": "#projects_list",
         "projectItem": "li[data-type='project_list_item']"
+    },
+    "project": {
+        "title": "span.simple_content",
+        "taskCreation": {
+            "addTask": "button.plus_add_button",
+            "taskNameField": "p[data-placeholder='Task name']",
+            "taskDescriptionField": "p[data-placeholder='Description']",
+            "dueDateButton": "div[aria-label='Set due date']",
+            "calendarModal": "div.scheduler_popper.popper",
+            "calendar": {
+                "todayButton": "button[data-action-hint='scheduler-suggestion-today']",
+                "tomorrowButton": "button[data-action-hint='scheduler-suggestion-tomorrow']",
+                "nextWkndButton": "button[data-action-hint='scheduler-suggestion-nextWeekend']",
+                "nextWeekButton": "button[data-action-hint='scheduler-suggestion-nextWeek']"
+            },
+            "priority": "div[aria-label='Set priority']",
+            "priorityList": "#dropdown-select-2-popup",
+            "priorityListElement": "#dropdown-select-14-option-",
+            "cancelTaskButton": "button[aria-label='Cancel']",
+            "addTaskButton": "button[data-testid='task-editor-submit-button']"
+        },
+        "existingTasks": {
+            "taskList": ".list_holder",
+            "taskListElements": ".task_list_item.task_list_item--project_hidden"
+        }
     }
 }
