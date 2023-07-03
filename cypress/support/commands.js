@@ -53,7 +53,7 @@ Cypress.Commands.add('createProjectApi', (testData) => {
         expect(response.body).to.have.property("is_team_inbox").to.not.be.null.and.not.be.undefined
         expect(response.body).to.have.property("view_style").to.not.be.null.and.not.be.undefined
         expect(response.body).to.have.property("url").to.not.be.null.and.not.be.undefined
-        return response
+        return response.body
     });
 })
 
@@ -115,13 +115,13 @@ Cypress.Commands.add('getTasksByProjectId', (projId) => {
     cy.request({
         method: 'GET',
         url: Cypress.env('baseUrlApi') + endpoints.tasks,
-        headers: { 'Authentication': 'Bearer ' + Cypress.env('apiToken'), },
+        headers: { 'Authorization': 'Bearer ' + Cypress.env('apiToken'), },
     }).then((response) => {
         let taskArr = []
-        for(let index in response.body) {
+        for (let index in response.body) {
             let obj = response.body[index]
-            if(obj.project_id == projId)
-            taskArr.push(obj)
+            if (obj.project_id == projId)
+                taskArr.push(obj)
         }
         return taskArr
     });
@@ -131,7 +131,7 @@ Cypress.Commands.add('getProjectByName', (name) => {
     cy.request({
         method: 'GET',
         url: Cypress.env('baseUrlApi') + endpoints.projects,
-        headers: { 'Authentication': 'Bearer ' + Cypress.env('apiToken'), },
+        headers: { 'Authorization': 'Bearer ' + Cypress.env('apiToken'), },
     }).then((response) => {
         for (let index in response.body) {
             let obj = response.body[index]
@@ -140,7 +140,21 @@ Cypress.Commands.add('getProjectByName', (name) => {
             }
         }
     });
+})
 
+Cypress.Commands.add('createTask', (testData, projectId) => {
+    cy.request({
+        method: 'POST',
+        url: Cypress.env('baseUrlApi') + endpoints.tasks,
+        headers: { 'Authorization': 'Bearer ' + Cypress.env('apiToken'), },
+        body: {
+            content: testData.taskName,
+            priority: testData.priority,
+            project_id: projectId
+        }
+    }).then((response) => {
+        console.log(response.body)
+    });
 })
 
 

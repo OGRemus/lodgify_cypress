@@ -3,9 +3,9 @@ import { generateTestData } from '../fixtures/testData'
 import { login } from '../page_objects/login'
 import { projectMenu } from '../page_objects/projectMenu'
 
-var testData = generateTestData()
 
 context('Scenario 1', () => {
+    var testData = generateTestData()
     before('Create a project via API call', () => {
         cy.createProjectApi(testData)
     });
