@@ -6,8 +6,6 @@ export function generateTestData() {
         projectName: "Project " + Math.floor(Math.random() * 100),
         taskName: "Task" + Math.floor(Math.random() * 100),
         priority: Math.floor(Math.random() * 4) + 1
-
-
     }
     return data
 }

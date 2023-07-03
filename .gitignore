@@ -133,3 +133,7 @@ package-lock.json
 
 mochawesome-report
 mochawesome-report/*
+
+.env
+cypress.env.json
+cypress/screenshots

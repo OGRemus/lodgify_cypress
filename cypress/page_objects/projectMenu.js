@@ -1,6 +1,5 @@
 import { generateTestData } from '../fixtures/testData'
 import selectors from '../fixtures/selectors.json'
-import userData from '../fixtures/userData.json'
 
 export class ProjectMenu {
 

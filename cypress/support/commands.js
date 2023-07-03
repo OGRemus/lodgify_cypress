@@ -26,7 +26,6 @@
 import endpoints from '../fixtures/endpoints.json'
 import { generateTestData } from '../fixtures/testData'
 import selectors from '../fixtures/selectors.json'
-import userData from '../fixtures/userData.json'
 
 
 Cypress.Commands.add('createProjectApi', (testData) => {
@@ -97,10 +96,10 @@ Cypress.Commands.add('login', () => {
             should('contain', "Log in")
 
         cy.get(selectors.login.email)
-            .type(userData.email)
+            .type(Cypress.env('userMail'))
 
         cy.get(selectors.login.password)
-            .type(userData.pass)
+            .type(Cypress.env('userPass'))
 
         cy.get(selectors.login.loginButton)
             .should('be.visible')
