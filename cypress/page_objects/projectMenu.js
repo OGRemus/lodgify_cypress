@@ -17,6 +17,12 @@ export class ProjectMenu {
             .should('be.visible')
     }
 
+    checkNumberOfProjects(length) {
+        cy.get(selectors.application.projectList)
+        .children()
+        .should('have.length', length)
+    }
+
     selectProject(testData) {
         cy.contains(testData.projectName)
             .should('be.visible')
@@ -24,6 +30,13 @@ export class ProjectMenu {
 
         cy.contains(selectors.project.title, testData.projectName)
             .should('be.visible')
+    }
+
+    checkIfLimitReached (limit) {
+        // cy.find(selectors.application.lockButton)
+        // .should('have.length.above', 0)
+        cy.contains(`${limit}/${limit}`)
+        .should('be.visible')
     }
 }
 

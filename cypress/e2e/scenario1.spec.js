@@ -2,10 +2,11 @@
 import { generateTestData } from '../fixtures/testData'
 import { login } from '../page_objects/login'
 import { projectMenu } from '../page_objects/projectMenu'
+import endpoints from '../fixtures/endpoints.json'
 
 
 context('Scenario 1', () => {
-    var testData = generateTestData()
+    let testData = generateTestData()
     before('Create a project via API call', () => {
         cy.createProjectApi(testData)
     });
@@ -24,15 +25,46 @@ context('Scenario 1', () => {
 
     });
 
-    // describe('Create project - reach project number limit', () => {
-    //     it('', () => {
-            
-    //     });
-    // });
+    
+});
 
-    // describe('Create project - unhappy flows', () => {
-    //     it('Exceed project limit then check the web application', () => {
-            
-    //     });
-    // });
+context('Scenario 1 - boundary and equivalence', () => {
+    describe('Create project', () => {
+        let testData = generateTestData()
+        before(() => {
+            cy.login()
+        });
+
+        after(() => {
+            cy.projectsCleanup()
+        });
+        it('Reach project limit and check', () => {
+            for(let index=0; index < 5; index ++) {
+                cy.createProjectApi(testData)
+            }
+            projectMenu.checkNumberOfProjects(testData.projectLimit)
+        });
+
+        it('Check if lock button appeared', () => {
+            projectMenu.checkIfLimitReached(testData.projectLimit)
+        });
+
+        it('Exceed limit through API and check web application', () => {
+            cy.request({
+                method: 'POST',
+                failOnStatusCode: false,
+                url: Cypress.env('baseUrlApi') + endpoints.projects,
+                headers: {
+                    'Authorization': 'Bearer ' + Cypress.env('apiToken'),
+                },
+                body: {
+                    name: testData.projectName,
+                    color: testData.projectColor
+                }
+            }).then((response) => {
+                expect(response.status, "Created project even if limit was exceeded").to.not.eq(200)
+            })
+            projectMenu.checkIfLimitReached(testData.projectLimit)
+        });
+    });
 });

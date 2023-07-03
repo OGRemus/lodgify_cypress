@@ -11,7 +11,8 @@
         "topMenu": "#top-menu",
         "projectMenu": "#left-menu-projects-panel",
         "projectList": "#projects_list",
-        "projectItem": "li[data-type='project_list_item']"
+        "projectItem": "li[data-type='project_list_item']",
+        "lockButton": "button[aria-label='Unlock more projects']"
     },
     "project": {
         "title": "span.simple_content",
