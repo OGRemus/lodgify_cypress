@@ -17,9 +17,11 @@ To run a specific scenario use the scripts in package.json : `npm run <scenario>
 
 To run all the spec files use <`npm run runall`>
 
+## Reporting
 
 After each run, a mochawesome report will be generated in mochawesome-report folder inside the root of the project. Each report has the timestamp of the test run. To see the report, open the html file in your browser
 
+If tests fail, the screenshotOnRunFailure option is enabled in cypress.config.js. Screenshots are saved under the cypress/screenshots folder
 ## Test data
 
 User credentials should be stored in `cypress.env.json` . The file should be created before the test run. The format for credentials are `userMail` for email and `userPass` for password
