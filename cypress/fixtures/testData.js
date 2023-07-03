@@ -4,7 +4,10 @@ export function generateTestData() {
     let data = {
         projectColor: colors[Math.floor(Math.random() * colors.length)],
         projectName: "Project " + Math.floor(Math.random() * 100),
-        taskName: "Task" + Math.floor(Math.random() * 100)
+        taskName: "Task" + Math.floor(Math.random() * 100),
+        priority: Math.floor(Math.random() * 4) + 1
+
+
     }
     return data
 }

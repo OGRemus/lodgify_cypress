@@ -25,9 +25,8 @@ context('Scenario 2', () => {
             projectDash.fillTaskDescription()
             projectDash.clickOnDueDate()
             projectDash.quickSelectTodayDue()
-            let priority = Math.floor(Math.random() * 4) + 1
             projectDash.clickOnPriorityButton()
-            projectDash.setPriority(priority)
+            projectDash.setPriority(testData.priority)
             projectDash.clickOnAddTaskButton()
             projectDash.checkIfTaskExists(testData.taskName)
         });
@@ -44,6 +43,9 @@ context('Scenario 2', () => {
                         }
                         expect(resolution).to.be.true
                         expect(obj).to.have.property("description", "Just a description")
+                        expect(obj).to.have.property("priority", testData.priority)
+                        expect(obj.due.string).to.contain('today')
+                        expect(obj.due.datetime).to.eq(Date.getDate().toISOString().split('T')[0])
                     }
                 })
             }))
